@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="githubApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Application</title>
+    <link rel="stylesheet" href="css/base.css"/>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app.js"></script>
+</head>
+<body>
+    Hello from James
+
+    <section class="contacts" ng-controller="ContactsController">
+        <button ng-click="getContacts()">Get Contacts</button>
+        <ul>
+            <li ng-repeat="contact in contacts">
+                {{contact.name}}
+            </li>
+        </ul>
+    </section>
+
+    <section ng-controller="GithubController">
+        {{message}}
+
+        <input type="text" ng-model="search.full_name"/>
+
+        <ul>
+            <li ng-repeat="item in items | filter: search.full_name">
+                {{item['full_name']}}
+            </li>
+        </ul>
+    </section>
+</body>
+</html>
