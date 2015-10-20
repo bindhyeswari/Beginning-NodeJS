@@ -19,4 +19,28 @@ app.controller('ContactsController', function ($scope, $http) {
         });
 
     };
+
+    $scope.contact = {
+        name: 'James',
+        email: 'james@gmail.com',
+        tel: '408 819 2356'
+    };
+    $scope.createContact = function () {
+        console.log($scope.contact);
+
+        $http.post('/contacts', $scope.contact).then(function (config) {
+            console.log(config.data);
+            $scope.contact = {};
+        });
+    }
+
+    $scope.delete = function (contact) {
+        console.log(contact);
+
+        $http.delete('/contacts/' + encodeURIComponent(contact.email)).then(function (config) {
+            console.log(config.data);
+            var index = $scope.contacts.indexOf(contact);
+            $scope.contacts.splice(index, 1);
+        });
+    }
 });

@@ -10,11 +10,22 @@
 <body>
     Hello from James
 
-    <section class="contacts" ng-controller="ContactsController">
+    <section ng-controller="ContactsController">
+
+        <h1>Create a Contact</h1>
+        <hr/>
+        <input type="text" ng-model="contact.name" placeholder="name"/><br/>
+        <input type="email" ng-model="contact.email" placeholder="email"/><br/>
+        <input type="tel" ng-model="contact.tel" placeholder="tel"/><br/>
+        <button ng-click="createContact()">Create Contact</button>
+
+
+        <hr/>
         <button ng-click="getContacts()">Get Contacts</button>
         <ul>
             <li ng-repeat="contact in contacts">
-                {{contact.name}}
+                {{contact.name}} has a number {{contact.tel}} and his email is {{contact.email}}
+                <button ng-click="delete(contact)">Delete</button>
             </li>
         </ul>
     </section>
@@ -30,5 +41,7 @@
             </li>
         </ul>
     </section>
+
+
 </body>
 </html>

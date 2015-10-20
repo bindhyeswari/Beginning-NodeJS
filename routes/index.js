@@ -41,12 +41,28 @@ router.get('/james', function (req, res) {
 
 });
 
+var contacts = [];
+
 router.get('/contacts', function (req, res) {
-   res.json([
-       { name: 'BP Mishra' },
-       { name: 'James Kim' },
-       { name: 'Rohit Arora' }
-   ]);
+   res.json(contacts);
+});
+
+router.post('/contacts', function (req, res) {
+    console.log(req.body);
+    contacts.push(req.body);
+    res.status(201).json({message: 'Created the object ... '});
+});
+
+router.delete('/contacts/:email', function (req, res) {
+    console.log(req.params.email);
+    contacts.every(function (contact, index) {
+        if (contact.email === req.params.email) {
+            contacts.splice(index, 1);
+            return false;
+        }
+        return true;
+    });
+    res.status(200).json({message: 'Successfully deleted ' + req.params.email});
 });
 
 module.exports = router;
